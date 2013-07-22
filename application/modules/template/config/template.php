@@ -20,15 +20,15 @@ $config['template'] = array(
     
     //JavaScript for Admin Template
     'admin_js' => array(
+        base_url('public/js/modernizr-2.6.1-respond-1.1.0.min'),
         '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
         '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'
     ),
     
     //Styles for Admin Template
     'admin_css' => array(
-        'admin-global.css',
-        'admin-structure.css',
-        'admin-style.css'
+        'normalize.min.css',
+        'admin.css'
     ),
     
     //JavaScript for Main template
@@ -36,6 +36,12 @@ $config['template'] = array(
         'jquery' => '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
         'jquery ui' => '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'
      ),
+    
+    //Styles for Admin Template
+    'main_css' => array(
+        'normalize.min.css',
+        'main.css'
+    ),
     
     //Just Meta Tag Description
     'title' => 'Zkeleton Codeigniter',

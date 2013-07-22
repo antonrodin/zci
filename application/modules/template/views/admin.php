@@ -1,29 +1,51 @@
 <!DOCTYPE html>
-<html lang="<?php echo $this->lang->lang(); ?>">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="<?php echo $this->lang->lang(); ?>"> <!--<![endif]-->
     <head>
-	<meta charset="UTF-8" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title><?php _e($title); ?></title>
-        <meta name="description" content="<?php _e($description); ?>" />
-	<meta name="robots" content="all" />
+        <meta name="description" content="<?php _e($description); ?>" >
+        <meta name="viewport" content="width=device-width">
+
         <?php foreach($admin_css as $href) { ?>
             <link href="<?php echo base_url("public/css/$href"); ?>" rel="stylesheet" >
         <?php } ?>
         <?php foreach($admin_js as $src) { ?>
             <script src="<?php echo $src; ?>"></script>
-        <?php } ?>          
+        <?php } ?> 
+
+        <script src="/front/try/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     </head>
     <body>
-        <header>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+<div class="header-container">
+        <header class="wrapper clearfix">
             <?php $this->load->view("{$admin_header}") ?>
         </header>
+</div>
+        
+<div class="main-container">
+    <div class="main wrapper clearfix">
+        <article>
+            <?php $this->load->view("{$module}/{$view}") ?>
+        </article>
+        
         <aside>
             <?php $this->load->view("{$module}/{$admin_sidebar}") ?>
         </aside>
-        <section>
-            <?php $this->load->view("{$module}/{$view}") ?>
-        </section>
-        <footer>
-            <?php $this->load->view("{$admin_footer}") ?>
-        </footer>
-    </body>
-</html>
+        
+    </div>
+</div>
+
+    <div class="footer-container">
+        <footer class="wrapper">
+                <?php $this->load->view("{$admin_footer}") ?>
+       </footer>
+    </div>
+
+</body></html>
