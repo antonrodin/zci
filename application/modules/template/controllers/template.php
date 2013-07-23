@@ -7,13 +7,19 @@ class Template extends MX_Controller {
         $this->init_config();
     }
     
-    public function admin($data) {
+    public function index() {
+        
+    }
+    
+    public function admin($data = array()) {
         $this->_data = array_merge($this->_data, $data);
         $this->load->view('admin', $this->_data);
     }
     
     private function init_config() {
         $this->_data = $this->config->item('template');
+        $this->_data['module'] = strtolower(get_class($this));
+        $this->_data['view'] = 'admin/default';
     }
     
     private $_data;

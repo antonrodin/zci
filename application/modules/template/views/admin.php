@@ -15,9 +15,7 @@
         <?php } ?>
         <?php foreach($admin_js as $src) { ?>
             <script src="<?php echo $src; ?>"></script>
-        <?php } ?> 
-
-        <script src="/front/try/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+        <?php } ?>
     </head>
     <body>
         <!--[if lt IE 7]>
