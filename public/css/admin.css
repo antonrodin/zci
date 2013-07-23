@@ -37,7 +37,13 @@ nav {}
 /* Default main Styles*/
 .main { padding: 30px 0; }
     .main article h1 { font-size: 2em; }
-    .main aside { color: white; padding: 0px 5% 10px; }
+    .main aside { color: white; padding: 0px 5% 10px; overflow: hidden; }
+
+/* Default aside menu */
+aside ul { list-style: none; }
+    aside li { margin: 10px; float: left; }
+    aside li a { color: white; text-decoration: none; }
+    
 .footer-container footer { color: white; padding: 20px 0; }
 .ie7 .title { padding-top: 20px; }
 
@@ -55,8 +61,6 @@ nav {}
 @media only screen and (min-width: 768px) {
     .title { float: left; }
     nav { float: right; width: 38%; }
-    .main article { float: left; width: 57%; }
-    .main aside { float: right; width: 28%; }
 }
 
 /** Big Devices */

@@ -1,4 +1,3 @@
-<h3>Aside</h3>
 <ul>
     <li><a href="#">Sub Option 1</a></li>
     <li><a href="#">Sub Option 2</a></li>

@@ -29,14 +29,13 @@
         
 <div class="main-container">
     <div class="main wrapper clearfix">
-        <article>
-            <?php $this->load->view("{$module}/{$view}") ?>
-        </article>
-        
         <aside>
             <?php $this->load->view("{$module}/{$admin_sidebar}") ?>
         </aside>
         
+        <article>
+            <?php $this->load->view("{$module}/{$view}") ?>
+        </article>    
     </div>
 </div>
 
