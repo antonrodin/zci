@@ -1,5 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+ * Simple USER class with some basic CRUD operations
+ */
 class User extends MX_Controller {
     
     public function __construct() {
@@ -7,21 +10,34 @@ class User extends MX_Controller {
         $this->init_config();
     }
     
+    /**
+     * User index redirect home
+     */
     public function index() {
         $this->redirect_home();
     }
     
+    /**
+     * Show login Form
+     */
     public function login() {
         $this->_data['view'] = 'login';
+        $this->_data['admin_sidebar'] = "common/no_sidebar";
         echo Modules::run("template/admin", $this->_data);
     }
     
+    /**
+     * Check if USER is logged IN
+     */
     public function is_logged_in() {
         if (!$this->session->userdata("is_logged_in")) {
             redirect($this->_login, "refresh");
         }
     }
-    
+
+    /**
+     * Sign IN. Get username and password from POST data. Get user by "slug" or "username" and check password
+     */
     public function sign_in() {
 
         $error = false;
@@ -59,6 +75,9 @@ class User extends MX_Controller {
         }     
     }
     
+    /**
+     * Sign OUT. Delete Session Data and redirect to Login.
+     */
     public function sign_out() {
         $data = array(
                 'username' => '',
@@ -68,6 +87,9 @@ class User extends MX_Controller {
         redirect($this->_login, 'refresh');
     }
     
+    /**
+     * Show ALL User
+     */
     public function all() {
         Modules::run("user/is_logged_in");
         $this->_data['all'] = $this->get_all();
@@ -75,36 +97,40 @@ class User extends MX_Controller {
         echo Modules::run("template/admin", $this->_data);
     }
     
-    public function show($id) {
-        $this->_data['object'] = $this->get_by_id((int) $id);
-        $this->load->view('show', $this->_data);
-    }
-    
+    /**
+     * Show Add Form
+     */
     public function add() {
         Modules::run("user/is_logged_in");
         $this->_data['action'] = "insert";
         $this->_data['id'] = -1;
-        $this->populate($array_data = array());
         $this->_data['view'] = 'form';
         echo Modules::run("template/admin", $this->_data);
     }
     
-    public function delete($id) {
-        Modules::run("user/is_logged_in");
-        $this->mdl_users->delete_by_id($id);
-        $this->redirect_home();
+    public function delete($id = -1) {
+        if ($id != -1) {
+            Modules::run("user/is_logged_in");
+            $this->mdl_users->delete_by_id($id);
+            $this->redirect_home();
+        }
     }
     
-    public function edit($id) {
-        Modules::run("user/is_logged_in");
-        $this->_data['id'] = (int) $id;
-        $this->_data['action'] = "update";
-        $object = $this->get_by_id($id);
-        $this->populate(array_pop($object->result_array())); 
-        $this->_data['view'] = 'form';
-        echo Modules::run("template/admin", $this->_data);
+    public function edit($id = -1) {
+        if ($id != -1) {
+            Modules::run("user/is_logged_in");
+            $this->_data['id'] = (int) $id;
+            $this->_data['action'] = "update";
+            $object = $this->get_by_id($id);
+            $this->populate(array_pop($object->result_array())); 
+            $this->_data['view'] = 'form';
+            echo Modules::run("template/admin", $this->_data);
+        }
     }
     
+    /**
+     * Insert 
+     */
     public function insert() {
        Modules::run("user/is_logged_in");
        if ($this->validate()) {
@@ -119,23 +145,37 @@ class User extends MX_Controller {
        }  
     }
     
-    /* PRIVATE FUNCTIONS */
-    
+    /**
+     * Get USER from Database by ID
+     * @param <integer> $id User ID
+     * @return <array> Return Array with USER data. If no USER found return array with 0 rows.
+     */
     private function get_by_id($id) {
         Modules::run("user/is_logged_in");
         return $this->mdl_users->get_by_id($id);
     }
     
+    /**
+     * Get All User inside STD Object
+     * @return type <stdObject> array of STDObject
+     */
     private function get_all() {
        return $this->mdl_users->get_all();
     }
     
+    /**
+     * Get User data by Slug. Inspired by Ruby on rails.
+     * @param type $slug
+     * @return type <User> User data from database. If no USER found return object with 0 rows
+     */
     private function get_by_slug($slug) {
         return $this->mdl_users->get_by_slug($slug);
     }
     
-    
-    /* SHOULD TO BE MODIFIED */
+    /**
+     * Validate post data from user form.
+     * @return boolean true if validatino process OK. False otherwise.
+     */
     private function validate() {
          Modules::run("user/is_logged_in");
          $field = "username";
@@ -154,19 +194,10 @@ class User extends MX_Controller {
         }
     }
     
-    private function populate($array_data) {
-        Modules::run("user/is_logged_in");
-        if (empty($array_data)) {
-            $array_data = array(
-                    'username' => 'Username',
-                    'password' => 'Password',
-                    'email_address' => 'Email Address'
-            );
-        }
-        $this->_data = array_merge($array_data, $this->_data);
-        $this->_data['confirm_password'] = 'Passw0rd';
-    }
-    
+    /**
+     * Populate array with USER data. Required for user model add and update functions
+     * @return type <array> with user data
+     */
     private function post_populate() {
         Modules::run("user/is_logged_in");
         return $array = array(
@@ -177,18 +208,40 @@ class User extends MX_Controller {
         );
     }
     
+    /**
+     * Redirect home, requiered for redirecting stuff
+     */
     private function redirect_home() {
         redirect("{$this->_home}", "refresh");
     }
     
+    /**
+     * Init basic config for User Class
+     * Load User Model
+     * Define Module name. Required for loading views
+     * Define Sidebar for User Admin Panel
+     */
     private function init_config() {
         $this->load->model("mdl_users");
         $this->_data['module'] = strtolower(get_class($this));
         $this->_data['admin_sidebar'] = "common/admin_sidebar";
     }
     
+    /**
+     * @var <array> Data Array. Required for pass data to VIEWS.
+     */
     private $_data = array();
+    
+    /**
+     * Home Route.
+     * @var <String> Route reuquiered for redirecting into user list
+     */
     private $_home = "/admin/user/all";
+    
+    /**
+     * Login Route.
+     * @var <String> Route requiered for redirect to login page
+     */
     private $_login = "/admin";
     
 }
