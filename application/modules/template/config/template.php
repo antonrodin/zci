@@ -15,7 +15,7 @@ $config['template'] = array(
     //Admin Top Menu
     'admin_menu' => array(
         'Config' => 'config',
-        'User' => 'user',
+        'User' => 'user/all',
     ),
     
     //JavaScript for Admin Template

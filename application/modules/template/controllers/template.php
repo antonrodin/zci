@@ -11,6 +11,12 @@ class Template extends MX_Controller {
         
     }
     
+    public function config() {
+        echo "<pre>";
+        print_r($this->_data);
+        echo "</pre>";
+    }
+    
     public function admin($data = array()) {
         $this->_data = array_merge($this->_data, $data);
         $this->load->view('admin', $this->_data);

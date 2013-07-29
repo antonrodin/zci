@@ -63,5 +63,8 @@ $route['admin'] = "user/login";
 $route['admin/login'] = "user/login";
 $route['admin/user/(:any)'] = "user/$1";
 
+/* Template Settings */
+$route['admin/config'] = "template/config";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -122,7 +122,7 @@ class User extends MX_Controller {
             $this->_data['id'] = (int) $id;
             $this->_data['action'] = "update";
             $object = $this->get_by_id($id);
-            $this->populate(array_pop($object->result_array())); 
+            $this->_data = array_merge( $this->_data, array_pop($object->result_array()) );    
             $this->_data['view'] = 'form';
             echo Modules::run("template/admin", $this->_data);
         }

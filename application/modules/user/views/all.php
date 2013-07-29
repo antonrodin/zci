@@ -5,7 +5,7 @@
         <tr>
             <th>ID: </th>
             <th>User name: </th>
-            <th>Password: </th>
+            <th>Password (md5 encryption): </th>
             <th>Email adress: </th>
             <th>Control: </th>
         </tr>
