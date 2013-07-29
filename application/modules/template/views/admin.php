@@ -16,23 +16,32 @@
   <body>
 
      <?php $this->load->view("{$admin_header}") ?>
-        
-    <div class="container margin-top-60">
-        <div class="row">
-            <div class="span4">
-            <?php $this->load->view("{$module}/{$admin_sidebar}") ?>
+    
+      <div class="container margin-top-60">
+          <div class="row">
+            <div class="span12">
+                <?php $this->load->view("{$module}/{$admin_sidebar}") ?>
+            </div>
         </div>
-
-            <div class="span8">
+      </div>
+      
+    <div class="container">
+        <div class="row">
+            <div class="span12">
                 <?php $this->load->view("{$module}/{$view}") ?>
             </div>
-    </div>
+        </div>
     </div>
 
     <div id="footer" class="visible-lg">
         <?php $this->load->view("{$admin_footer}") ?>
     </div>
 
-    
+    <!-- Javascript in the bottom for faster loading -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+    <?php foreach($admin_js as $src) { ?>
+        <script src="<?php echo $src; ?>" ></script>
+    <?php } ?>
   </body>
 </html>

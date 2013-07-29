@@ -1,6 +1,6 @@
 <h1>All Users</h1>
     
-<table>
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>ID: </th>

@@ -1,4 +1,6 @@
 /* My Awesome StyleSheets */
+@import url(http://fonts.googleapis.com/css?family=Asap:400,700);
+body { font-family: 'Asap'; font-weight: 400; color: #5a5a5a; font-size:12pt; }
 
 .margin-top-60 { margin-top: 60px; }
 .margin-top-40 { margin-top: 40px; }

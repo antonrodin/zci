@@ -20,8 +20,7 @@ $config['template'] = array(
     
     //JavaScript for Admin Template
     'admin_js' => array(
-        base_url('public/js/bootstrap.min.js'),
-        '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'
+        base_url('public/js/bootstrap.min.js')
     ),
     
     //Styles for Admin Template
@@ -32,8 +31,7 @@ $config['template'] = array(
     
     //JavaScript for Main template
     'home_js' => array(
-        base_url('public/js/bootstrap.min.js'),
-        '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'
+        base_url('public/js/bootstrap.min.js')
     ),
     
     //Styles for Admin Template
