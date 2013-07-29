@@ -12,9 +12,8 @@ class Template extends MX_Controller {
     }
     
     public function config() {
-        echo "<pre>";
-        print_r($this->_data);
-        echo "</pre>";
+       $this->_data['default_config'] = $this->_data;
+       $this->load->view('admin', $this->_data);
     }
     
     public function admin($data = array()) {
