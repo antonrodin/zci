@@ -9,10 +9,10 @@ This is a Zkeleton a Codeigniter APP that includes:
 
 <ul>
 <li>Codeigniter 2.1.4</li>
-<li>HMVC</li>
+<li>HMVC for CI from Wiredesign</li>
 <li>Internalization Library i18n (Now I'am working on Spanish and Russian translate)</li>
 <li>Very simple Auth Library (You can easy change or replace it)</li>
-<li>Twitter Boiler Plate Template 3.0.0 RC1</li>
+<li>Twitter Bootstrap Template 3.0.0 RC1</li>
 <li>JQuery 1.10.2</li>
 </ul>
 
