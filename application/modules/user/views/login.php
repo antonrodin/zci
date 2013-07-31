@@ -1,5 +1,6 @@
-    <h1><?php echo _e("Login"); ?>: </h1>
+
         <form action="<?php echo base_url("admin/user/sign_in"); ?>" method="post" class="form-horizontal">
+            <legend><?php echo _e("Login"); ?>:</legend>
             <div class="form-group">
                 <label class="col-lg-2 control-label" for="username"> <?php echo _e("User"); ?>: </label>
                 <div class="col-lg-4">
@@ -18,4 +19,3 @@
                 </div>
             </div>
         </form>
-    <div class="error"><?php echo $this->session->flashdata('error'); ?></div>

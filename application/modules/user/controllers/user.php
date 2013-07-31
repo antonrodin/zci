@@ -45,15 +45,15 @@ class User extends MX_Controller {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $message = "<p>Wrong username or password!</p>";
+        $message = "Wrong username or password!";
 
         if (!ctype_alnum($username)) {
-            $message = "<p>Username should contain only characters!</p>";
+            $message = 'Username should contain only characters!';
             $error = true;
         }
 
         if (!ctype_alnum($password)) {
-            $message = "<p>Password should contain only alphanumeric characters!</p>";
+            $message = "Password should contain only alphanumeric characters!";
             $error = true;
         }
 
@@ -67,10 +67,10 @@ class User extends MX_Controller {
                 'is_logged_in' => true
             );
             $this->session->set_userdata($data);
-            $this->session->set_flashdata('error', "<p>Welcome {$username}!</p>");
+            $this->session->set_flashdata('error', "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><p>Welcome {$username}!</p></div>");
             redirect($this->_home, "refresh");
         } else {
-            $this->session->set_flashdata('error', $message);
+            $this->session->set_flashdata('error', "<div class=\"alert alert-danger\"><p>{$message}</p></div>");
             redirect($this->_login, "refresh");
         }     
     }
@@ -112,6 +112,7 @@ class User extends MX_Controller {
         if ($id != -1) {
             Modules::run("security/is_logged_in");
             $this->mdl_users->delete_by_id($id);
+            $this->session->set_flashdata('error', "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>User deleted</div>");
             $this->redirect_home();
         }
     }
@@ -166,8 +167,12 @@ class User extends MX_Controller {
         $this->form_validation->set_rules('id', 'Id', 'required|numeric');
         
         if ($this->form_validation->run()) {
+            $error = "User {$action}ed";
+            $this->session->set_flashdata('error', "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>{$error}</div>");
             return true;
         } else {
+            $error = validation_errors();
+            $this->session->set_flashdata('error', "<div class=\"alert alert-danger\">{$error}</div>");
             return false;
         }
     }

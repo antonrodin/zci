@@ -1,4 +1,4 @@
-<?php echo validation_errors('<div class="alert alert-danger">', '</div>') ?>
+
 <form action="<?php echo site_url("/admin/user/insert"); ?>" method="post">
     <fieldset>
         <legend><?php echo ucwords($action); ?></legend>

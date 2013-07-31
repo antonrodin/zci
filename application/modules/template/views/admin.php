@@ -28,6 +28,14 @@
     <div class="container">
         <div class="row">
             <div class="span12">
+                <?php echo $this->session->flashdata('error'); ?>   
+            </div>
+        </div>
+    </div>
+      
+    <div class="container">
+        <div class="row">
+            <div class="span12">
                 <?php $this->load->view("{$module}/{$view}") ?>
             </div>
         </div>
