@@ -67,7 +67,7 @@ class User extends MX_Controller {
                 'is_logged_in' => true
             );
             $this->session->set_userdata($data);
-            $this->session->set_flashdata('error', "<p>Bienvenido {$username}. Se ha logueado correctamente.</p>");
+            $this->session->set_flashdata('error', "<p>Welcome {$username}!</p>");
             redirect($this->_home, "refresh");
         } else {
             $this->session->set_flashdata('error', $message);
@@ -91,8 +91,8 @@ class User extends MX_Controller {
      * Show ALL User
      */
     public function all() {
-        Modules::run("user/is_logged_in");
-        $this->_data['all'] = $this->get_all();
+        Modules::run("security/is_logged_in");
+        $this->_data['all'] = $this->mdl_users->get_all();
         $this->_data['view'] = 'all';
         echo Modules::run("template/admin", $this->_data);
     }
@@ -101,7 +101,7 @@ class User extends MX_Controller {
      * Show Add Form
      */
     public function add() {
-        Modules::run("user/is_logged_in");
+        Modules::run("security/is_logged_in");
         $this->_data['action'] = "insert";
         $this->_data['id'] = -1;
         $this->_data['view'] = 'form';
@@ -110,7 +110,7 @@ class User extends MX_Controller {
     
     public function delete($id = -1) {
         if ($id != -1) {
-            Modules::run("user/is_logged_in");
+            Modules::run("security/is_logged_in");
             $this->mdl_users->delete_by_id($id);
             $this->redirect_home();
         }
@@ -118,10 +118,10 @@ class User extends MX_Controller {
     
     public function edit($id = -1) {
         if ($id != -1) {
-            Modules::run("user/is_logged_in");
+            Modules::run("security/is_logged_in");
             $this->_data['id'] = (int) $id;
             $this->_data['action'] = "update";
-            $object = $this->get_by_id($id);
+            $object = $this->mdl_users->get_by_id($id);
             $this->_data = array_merge( $this->_data, array_pop($object->result_array()) );    
             $this->_data['view'] = 'form';
             echo Modules::run("template/admin", $this->_data);
@@ -132,7 +132,7 @@ class User extends MX_Controller {
      * Insert 
      */
     public function insert() {
-       Modules::run("user/is_logged_in");
+       Modules::run("security/is_logged_in");
        if ($this->validate($this->input->post('action'))) {
            $object_data = $this->post_populate();
            if ( method_exists($this->mdl_users, $this->input->post('action')) ) {
@@ -143,33 +143,6 @@ class User extends MX_Controller {
            if ($this->input->post('action') == 'insert') { $this->add(); }
            if ($this->input->post('action') == 'update') { $this->edit($this->input->post('id')); }
        }  
-    }
-    
-    /**
-     * Get USER from Database by ID
-     * @param <integer> $id User ID
-     * @return <array> Return Array with USER data. If no USER found return array with 0 rows.
-     */
-    private function get_by_id($id) {
-        Modules::run("user/is_logged_in");
-        return $this->mdl_users->get_by_id($id);
-    }
-    
-    /**
-     * Get All User inside STD Object
-     * @return type <stdObject> array of STDObject
-     */
-    private function get_all() {
-       return $this->mdl_users->get_all();
-    }
-    
-    /**
-     * Get User data by Slug. Inspired by Ruby on rails.
-     * @param type $slug
-     * @return type <User> User data from database. If no USER found return object with 0 rows
-     */
-    private function get_by_slug($slug) {
-        return $this->mdl_users->get_by_slug($slug);
     }
     
     /**
@@ -204,8 +177,7 @@ class User extends MX_Controller {
      * @return type <array> with user data
      */
     private function post_populate() {
-        Modules::run("user/is_logged_in");
-        return $array = array(
+        return array(
                'id' => $this->input->post('id'),
                'username' => $this->input->post('username'),
                'password' => md5($this->input->post('password')),
