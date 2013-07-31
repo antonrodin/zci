@@ -1,4 +1,4 @@
-<div class="error"><?php echo validation_errors('<p>', '') ?></div>
+<?php echo validation_errors('<div class="alert alert-danger">', '</div>') ?>
 <form action="<?php echo site_url("/admin/user/insert"); ?>" method="post">
     <fieldset>
         <legend><?php echo ucwords($action); ?></legend>
@@ -25,3 +25,6 @@
         <button type="submit" class="btn btn-default"><?php echo ucwords($action); ?></button>
     </fieldset>
 </form>
+<div class="margin-top-60">
+    <p>&nbsp;</p>
+</div>

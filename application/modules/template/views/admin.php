@@ -20,7 +20,7 @@
       <div class="container margin-top-60">
           <div class="row">
             <div class="span12">
-                <?php $this->load->view("{$module}/{$admin_sidebar}") ?>
+                <?php $this->load->view("{$admin_sidebar}") ?>
             </div>
         </div>
       </div>

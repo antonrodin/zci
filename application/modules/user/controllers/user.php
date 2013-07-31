@@ -22,7 +22,7 @@ class User extends MX_Controller {
      */
     public function login() {
         $this->_data['view'] = 'login';
-        $this->_data['admin_sidebar'] = "common/no_sidebar";
+        $this->_data['admin_sidebar'] = "user/common/no_sidebar";
         echo Modules::run("template/admin", $this->_data);
     }
     
@@ -224,7 +224,7 @@ class User extends MX_Controller {
     private function init_config() {
         $this->load->model("mdl_users");
         $this->_data['module'] = strtolower(get_class($this));
-        $this->_data['admin_sidebar'] = "common/admin_sidebar";
+        $this->_data['admin_sidebar'] = "user/common/admin_sidebar";
     }
     
     /**
