@@ -4,7 +4,7 @@
         <legend><?php echo ucwords($action); ?></legend>
         <div class="form-group">
                 <label for="username">Username: </label>
-                <input class="form-control" placeholder="User name" type="text" id="username" name="username" value="<?php if (isset($username)) { echo set_value('username', $username); } ?>" />
+                <input class="form-control" placeholder="User name" type="text" id="username" name="username" value="<?php if (!isset($username)) { echo set_value('username'); } else { echo $username; } ?>" />
         </div>
         <div class="form-group">
             <label for="password">Password: </label>
@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
             <label for="email_address">Email: </label>
-            <input class="form-control" placeholder="Valid Email" type="text" id="email_address" name="email_address" value="<?php if(isset($email_address)) { echo set_value('email_address', $email_address); } ?>" />
+            <input class="form-control" placeholder="Valid Email" type="text" id="email_address" name="email_address" value="<?php if(!isset($email_address)) { echo set_value('email_address'); } else { echo $email_address; } ?>" />
         </div>
         
         <input type="hidden" name="action" value="<?php echo set_value('action', $action); ?>" />

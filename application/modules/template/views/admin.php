@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Anton Zekeriev Rodin">
-    <title><?php _e($title); ?></title>
-    <meta name="description" content="<?php _e($description); ?>" >
+    <title><?php _e($meta_title); ?></title>
+    <meta name="description" content="<?php _e($meta_description); ?>" >
 
     <!-- Bootstrap core CSS -->
     <?php foreach($admin_css as $href) { ?>

@@ -41,7 +41,7 @@ $config['template'] = array(
     ),
     
     //Just Meta Tag Description
-    'title' => 'Zkeleton Codeigniter',
-    'description' => 'Zkeleton is a CI framework with HMVC, i18n, template management system, jQuery and Twitter Bootstrap',   
+    'meta_title' => 'Zkeleton Codeigniter',
+    'meta_description' => 'Zkeleton is a CI framework with HMVC, i18n, template management system, jQuery and Twitter Bootstrap',   
     
 );

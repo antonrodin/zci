@@ -133,7 +133,7 @@ class User extends MX_Controller {
      */
     public function insert() {
        Modules::run("user/is_logged_in");
-       if ($this->validate()) {
+       if ($this->validate($this->input->post('action'))) {
            $object_data = $this->post_populate();
            if ( method_exists($this->mdl_users, $this->input->post('action')) ) {
                 call_user_func_array( array($this->mdl_users, $this->input->post('action')), array($object_data));
@@ -176,18 +176,23 @@ class User extends MX_Controller {
      * Validate post data from user form.
      * @return boolean true if validatino process OK. False otherwise.
      */
-    private function validate() {
-         Modules::run("user/is_logged_in");
-         $field = "username";
-         $table = $this->mdl_users->get_table();
-         $this->load->library('form_validation');
-         $this->form_validation->set_rules('username', 'Username', "required|is_unique[{$table}.{$field}]");
-         $this->form_validation->set_rules('password', 'Password', 'required');
-         $this->form_validation->set_rules('confirm_password', 'Password', 'required|matches[password]');
-         $this->form_validation->set_rules('email_address', 'Email Address', 'required|valid_email');
-         $this->form_validation->set_rules('action', 'Action', 'required');
-         $this->form_validation->set_rules('id', 'Id', 'required|numeric');
-         if ($this->form_validation->run()) {
+    private function validate($action) {
+        $this->load->library('form_validation');
+        if ($action == 'insert') {   
+            $table = $this->mdl_users->get_table();    
+            $this->form_validation->set_rules('username', 'Username', "required|is_unique[{$table}.username]");
+            $this->form_validation->set_rules('email_address', 'Email Address', "required|valid_email|is_unique[{$table}.email_address]");
+        } else {
+            $this->form_validation->set_rules('username', 'Username', "required");
+            $this->form_validation->set_rules('email_address', 'Email Address', 'required|valid_email');
+        }
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('confirm_password', 'Password', 'required|matches[password]');
+        
+        $this->form_validation->set_rules('action', 'Action', 'required');
+        $this->form_validation->set_rules('id', 'Id', 'required|numeric');
+        
+        if ($this->form_validation->run()) {
             return true;
         } else {
             return false;
