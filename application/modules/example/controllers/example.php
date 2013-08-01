@@ -25,8 +25,8 @@ class Example extends MX_Controller {
     public function add() {
         $this->_data['action'] = "insert";
         $this->_data['id'] = -1;
-        $this->populate($array_data = array());
-        $this->load->view('form', $this->_data);
+        $this->_data['view'] = "form";
+        echo Modules::run("template/admin", $this->_data);
     }
     
     public function delete($id) {
@@ -50,6 +50,7 @@ class Example extends MX_Controller {
            }
            $this->redirect_home();
        } else {
+           error_flashdata(validation_errors("<p>", "</p>"));
            if ($this->input->post('action') == 'insert') { $this->add(); }
            if ($this->input->post('action') == 'update') { $this->edit($this->input->post('id')); }
        }  
@@ -63,7 +64,7 @@ class Example extends MX_Controller {
          $this->load->library('form_validation');
          $this->form_validation->set_rules('name', 'Name', 'required');
          $this->form_validation->set_rules('slug', 'Slug', "required|is_unique[{$table}.{$field}]");
-         $this->form_validation->set_rules('edad', 'Edad', 'required|numeric');
+         $this->form_validation->set_rules('age', 'Age', 'required|numeric');
          $this->form_validation->set_rules('action', 'Action', 'required');
          $this->form_validation->set_rules('id', 'Id', 'required|numeric');
          if ($this->form_validation->run()) {
@@ -77,7 +78,7 @@ class Example extends MX_Controller {
         return $array = array(
                'id' => $this->input->post('id'),
                'slug' => $this->input->post('slug'),
-               'edad' => $this->input->post('edad'),
+               'age' => $this->input->post('age'),
                'name' => $this->input->post('name')
         );
     }
@@ -89,6 +90,7 @@ class Example extends MX_Controller {
     private function init_config() {
         $this->load->model("mdl_examples");
         $this->_data['module'] = strtolower(get_class($this));
+        $this->_data['admin_sidebar'] = "example/common/admin_sidebar";
     }
     
     private $_data = array();
