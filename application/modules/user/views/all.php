@@ -20,10 +20,10 @@
             <td class="control_panel">
                 <ul>
                     <li>
-                        <a href="<?php echo site_url('admin/user/edit/'. $object->id); ?>" title="Edit"><?php _e("Edit"); ?></a>
+                        <a href="<?php echo site_url('admin/user/edit/'. $object->id); ?>" title="Edit">Edit</a>
                     </li>
                     <li>
-                        <a href="<?php echo site_url('admin/user/delete/'. $object->id); ?>" title="Delete"><?php _e("Delete"); ?></a>
+                        <a href="<?php echo site_url('admin/user/delete/'. $object->id); ?>" title="Delete">Delete</a>
                     </li>
                 </ul>
             </td>

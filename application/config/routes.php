@@ -55,6 +55,9 @@ $route['^(es|ru|en)/(.+)$'] = "$2";
  */
 $route['^(es|ru|en)$'] = $route['default_controller'];
 
+/* Examples route for Exampe Module */
+$route['admin/example/(:any)'] = "example/$1";
+
 /**
  * Uri like admin/login -> go to -> user/login
  * Uri like admin/user/delete -> go to -> user/delete

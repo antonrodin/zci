@@ -13,7 +13,8 @@ class Example extends MX_Controller {
     
     public function all() {
         $this->_data['all'] = $this->mdl_examples->get_all();
-        $this->load->view('all', $this->_data);
+        $this->_data['view'] = "all";
+        echo Modules::run("template/admin", $this->_data);
     }
     
     public function show($slug) {
