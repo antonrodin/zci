@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Mdl_objects extends CI_Model {
+class Mdl_examples extends CI_Model {
     
     public function __construct() {
         parent::__construct();
@@ -50,6 +50,6 @@ class Mdl_objects extends CI_Model {
     }
     
     /* SHOULD BE MODIFIED */
-    private $_table = "objects";
+    private $_table = "examples";
     
 }

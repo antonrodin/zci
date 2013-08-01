@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Object extends MX_Controller {
+class Example extends MX_Controller {
     
     public function __construct() {
         parent::__construct();
@@ -12,12 +12,12 @@ class Object extends MX_Controller {
     }
     
     public function all() {
-        $this->_data['all'] = $this->get_all();
+        $this->_data['all'] = $this->mdl_examples->get_all();
         $this->load->view('all', $this->_data);
     }
     
-    public function show($id) {
-        $this->_data['object'] = $this->get_by_id((int) $id);
+    public function show($slug) {
+        $this->_data['object'] = $this->mdl_examples->get_by_slug($slug);
         $this->load->view('show', $this->_data);
     }
     
@@ -29,14 +29,14 @@ class Object extends MX_Controller {
     }
     
     public function delete($id) {
-        $this->mdl_objects->delete_by_id($id);
+        $this->mdl_examples->delete_by_id($id);
         $this->redirect_home();
     }
     
     public function edit($id) {
         $this->_data['id'] = (int) $id;
         $this->_data['action'] = "update";
-        $object = $this->get_by_id($id);
+        $object = $this->mdl_examples->get_by_id($id);
         $this->populate(array_pop($object->result_array())); 
         $this->load->view('form', $this->_data);
     }
@@ -55,24 +55,10 @@ class Object extends MX_Controller {
     }
     
     /* PRIVATE FUNCTIONS */
-    
-    private function get_by_id($id) {
-        return $this->mdl_objects->get_by_id($id);
-    }
-    
-    private function get_all() {
-       return $this->mdl_objects->get_all();
-    }
-    
-    private function get_by_slug($slug) {
-        return $this->mdl_objects->get_by_slug($slug);
-    }
-    
-    
     /* SHOULD TO BE MODIFIED */
     private function validate() {
          $field = "slug";
-         $table = $this->mdl_objects->get_table();
+         $table = $this->mdl_examples->get_table();
          $this->load->library('form_validation');
          $this->form_validation->set_rules('name', 'Name', 'required');
          $this->form_validation->set_rules('slug', 'Slug', "required|is_unique[{$table}.{$field}]");
@@ -84,17 +70,6 @@ class Object extends MX_Controller {
         } else {
             return false;
         }
-    }
-    
-    private function populate($array_data) {
-        if (empty($array_data)) {
-            $array_data = array(
-                    'name' => 'Name',
-                    'slug' => 'Slug',
-                    'edad' => 1
-            );
-        }
-        $this->_data = array_merge($array_data, $this->_data);
     }
     
     private function post_populate() {
@@ -111,11 +86,11 @@ class Object extends MX_Controller {
     }
     
     private function init_config() {
-        $this->load->model("mdl_objects");
+        $this->load->model("mdl_examples");
         $this->_data['module'] = strtolower(get_class($this));
     }
     
     private $_data = array();
-    private $_home = "/object/all";
+    private $_home = "/example/all";
     
 }
