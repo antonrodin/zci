@@ -142,8 +142,8 @@ class User extends MX_Controller {
            success_flashdata("<p>Ok!</p>");
            $this->redirect_home();
        } else {
-           if ($this->input->post('action') == 'insert') { $this->add(); }
-           if ($this->input->post('action') == 'update') { $this->edit($this->input->post('id')); }
+           if ($this->input->post('action') == 'insert') { redirect("admin/user/add"); }
+           if ($this->input->post('action') == 'update') { redirect("admin/user/edit/{$this->input->post('id')}"); }
        }  
     }
     
