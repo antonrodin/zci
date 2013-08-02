@@ -6,7 +6,7 @@
             <th>ID: </th>
             <th>Slug: </th>
             <th>Name: </th>
-            <th>Edad: </th>
+            <th>Age: </th>
             <th>Control: </th>
         </tr>
     </thead>
@@ -16,7 +16,7 @@
             <td><?php echo $object->id; ?></td>
             <td><?php echo $object->slug; ?></td>
             <td><?php echo $object->name; ?></td>
-            <td><?php echo $object->edad; ?></td>
+            <td><?php echo $object->age; ?></td>
             <td class="control_panel">
                 <ul>
                     <li>
