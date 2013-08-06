@@ -103,7 +103,7 @@ class Example extends MX_Controller {
         $this->session->set_flashdata('post', $this->input->post());
         return $array = array(
                'id' => $this->input->post('id'),
-               'slug' => $this->input->post('slug'),
+               'slug' => url_title($this->input->post('slug'), '-', TRUE),
                'age' => $this->input->post('age'),
                'name' => $this->input->post('name')
         );
