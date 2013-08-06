@@ -26,6 +26,11 @@ class Example extends MX_Controller {
         $this->_data['action'] = "insert";
         $this->_data['id'] = -1;
         $this->_data['view'] = "form";
+        
+        /* Is needed for repopulate the form when using flashdata */
+        if (is_array($this->session->flashdata('post'))) {       
+            $this->_data = array_merge( $this->_data, $this->session->flashdata('post'));
+        }
         echo Modules::run("template/admin", $this->_data);
     }
     
@@ -41,16 +46,21 @@ class Example extends MX_Controller {
         if(isset($id)) {
             $this->_data['id'] = (int) $id;
             $this->_data['action'] = "update";
-            $object = $this->mdl_examples->get_by_id($id);
-            $this->_data = array_merge( $this->_data, array_pop($object->result_array()) ); 
             $this->_data['view'] = 'form';
+            $object = $this->mdl_examples->get_by_id($id);
+            $this->_data = array_merge( $this->_data, array_pop($object->result_array()) );
+            
+            /* Is needed for repopulate the form when using flashdata */
+            if (is_array($this->session->flashdata('post'))) {       
+                $this->_data = array_merge( $this->_data, $this->session->flashdata('post'));
+            }
             echo Modules::run("template/admin", $this->_data);
         }
     }
     
     public function insert() {
+       $object_data = $this->post_populate();
        if ($this->validate()) {
-           $object_data = $this->post_populate();
            if ( method_exists($this->mdl_examples, $this->input->post('action')) ) {
                 call_user_func_array( array($this->mdl_examples, $this->input->post('action')), array($object_data));
            }
@@ -90,6 +100,7 @@ class Example extends MX_Controller {
     }
     
     private function post_populate() {
+        $this->session->set_flashdata('post', $this->input->post());
         return $array = array(
                'id' => $this->input->post('id'),
                'slug' => $this->input->post('slug'),

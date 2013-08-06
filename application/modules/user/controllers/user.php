@@ -105,6 +105,9 @@ class User extends MX_Controller {
         $this->_data['action'] = "insert";
         $this->_data['id'] = -1;
         $this->_data['view'] = 'form';
+        if (is_array($this->session->flashdata('post'))) {       
+            $this->_data = array_merge( $this->_data, $this->session->flashdata('post'));
+        }
         echo Modules::run("template/admin", $this->_data);
     }
     
@@ -123,7 +126,10 @@ class User extends MX_Controller {
             $this->_data['id'] = (int) $id;
             $this->_data['action'] = "update";
             $object = $this->mdl_users->get_by_id($id);
-            $this->_data = array_merge( $this->_data, array_pop($object->result_array()) );    
+            $this->_data = array_merge( $this->_data, array_pop($object->result_array()) );
+            if (is_array($this->session->flashdata('post'))) {       
+                $this->_data = array_merge( $this->_data, $this->session->flashdata('post'));
+            }
             $this->_data['view'] = 'form';
             echo Modules::run("template/admin", $this->_data);
         }
@@ -134,8 +140,8 @@ class User extends MX_Controller {
      */
     public function insert() {
        Modules::run("security/is_logged_in");
+       $object_data = $this->post_populate();
        if ($this->validate($this->input->post('action'))) {
-           $object_data = $this->post_populate();
            if ( method_exists($this->mdl_users, $this->input->post('action')) ) {
                 call_user_func_array( array($this->mdl_users, $this->input->post('action')), array($object_data));
            }
@@ -180,6 +186,7 @@ class User extends MX_Controller {
      * @return type <array> with user data
      */
     private function post_populate() {
+        $this->session->set_flashdata('post', $this->input->post());
         return array(
                'id' => $this->input->post('id'),
                'username' => $this->input->post('username'),
