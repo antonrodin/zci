@@ -22,8 +22,7 @@ class User extends MX_Controller {
      */
     public function login() {
         $this->_data['view'] = 'login';
-        $this->_data['admin_sidebar'] = "user/common/no_sidebar";
-        echo Modules::run("template/admin", $this->_data);
+        echo Modules::run("template/login", $this->_data);
     }
     
     /**

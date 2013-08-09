@@ -21,6 +21,11 @@ class Template extends MX_Controller {
         $this->load->view('admin', $this->_data);
     }
     
+    public function login($data = array()) {
+        $this->_data = array_merge($this->_data, $data);
+        $this->load->view('login', $this->_data);
+    }
+    
     private function init_config() {
         $this->_data = $this->config->item('template');
         $this->_data['module'] = strtolower(get_class($this));
