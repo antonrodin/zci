@@ -21,6 +21,7 @@ My Idea is not to build a CMS, is provide a Skeleton APP for start to build any 
 
 The official site for this APP is <a href="http://www.zci.es">www.zci.es</a>
 
+<h2>Licence or something Like this. I'm no IDEA what I'm doing :-)</h2>
 Licencense for ZCI: The MIT License (MIT)
 <strong>It shoule be noted that certain components like jQuery or Twitter Bootstrap have their own license.</strong>
 
