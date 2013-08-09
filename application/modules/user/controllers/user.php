@@ -21,17 +21,9 @@ class User extends MX_Controller {
      * Show login Form
      */
     public function login() {
+        Modules::run("security/is_logged_in_redirect",$this->_home);
         $this->_data['view'] = 'login';
         echo Modules::run("template/login", $this->_data);
-    }
-    
-    /**
-     * Check if USER is logged IN
-     */
-    public function is_logged_in() {
-        if (!$this->session->userdata("is_logged_in")) {
-            redirect($this->_login, "refresh");
-        }
     }
 
     /**

@@ -21,6 +21,12 @@ class Security extends MX_Controller {
         }
     }
     
+    public function is_logged_in_redirect($redirect) {
+        if ($this->session->userdata("is_logged_in")) {
+            redirect($redirect, "refresh");
+        }
+    }
+    
     public function encrypt($string) {
         return md5($string);
     }
