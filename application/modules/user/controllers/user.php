@@ -220,6 +220,6 @@ class User extends MX_Controller {
      * Login Route.
      * @var <String> Route requiered for redirect to login page
      */
-    private $_login = "/admin";
+    private $_login = "/admin/login";
     
 }
