@@ -1,5 +1,5 @@
 <h1>ZCI Simple Web App with Codeigniter</h1>
-<h2>BETA</h2>
+<h2>BETA 0.1</h2>
 
 Hi! First off all. Sorry for the English. I'm Anton Zekeriev Rodin (www.azr.es) Spanish Web Developer. This is my contribution
 for Codeigniter Community. All this time I wanted to create a simple and standard web APP with CI. This APP allow me to start any
@@ -21,11 +21,11 @@ My Idea is not to build a CMS, is provide a Skeleton APP for start to build any 
 
 The official site for this APP is <a href="http://www.zci.es">www.zci.es</a>
 
-<h2>Licence or something Like this. I'm no IDEA what I'm doing :-)</h2>
-Licencense for ZCI: The MIT License (MIT)
-<strong>It shoule be noted that certain components like jQuery or Twitter Bootstrap have their own license.</strong>
+<h2>Licence or something Like this. I have no IDEA what I'm doing :-)</h2>
+<h3>License for ZCI CODE: The MIT License (MIT) <a href="http://opensource.org/licenses/MIT">http://opensource.org/licenses/MIT</a></h3>
+<h4>Copyright (c) 2013 Anton Zekeriev Rodin</h4>
 
-Copyright (c) 2013 Anton Zekeriev Rodin (http://www.azrodin.com)
+<strong>It shoule be noted that certain components like jQuery or Twitter Bootstrap have their own license.</strong>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
