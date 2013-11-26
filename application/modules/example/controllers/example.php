@@ -18,8 +18,11 @@ class Example extends MX_Controller {
     }
     
     public function show($slug) {
-        $this->_data['object'] = $this->mdl_examples->get_by_slug($slug);
-        $this->load->view('show', $this->_data);
+        $object = $this->mdl_examples->get_by_slug($slug);
+        if ($object->num_rows() != 0) {
+            $this->_data['object'] = $object;
+            $this->load->view('show', $this->_data);
+        }
     }
     
     public function add() {
