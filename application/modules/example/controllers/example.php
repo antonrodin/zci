@@ -11,6 +11,10 @@ class Example extends MX_Controller {
         $this->redirect_home();
     }
     
+    /**
+     * All example function
+     * show all objects in custom view
+     */
     public function all() {
         $this->_data['all'] = $this->mdl_examples->get_all();
         $this->_data['view'] = "all";
