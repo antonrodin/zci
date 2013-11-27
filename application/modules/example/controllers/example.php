@@ -17,6 +17,10 @@ class Example extends MX_Controller {
         echo Modules::run("template/admin", $this->_data);
     }
     
+    /**
+     * Show example function
+     * @param type $slug string [a-z][0-9]
+     */
     public function show($slug) {
         $object = $this->mdl_examples->get_by_slug($slug);
         if ($object->num_rows() != 0) {
